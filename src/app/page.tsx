@@ -1,9 +1,7 @@
+import { Button } from "@/components/ui/button";
+
 const HomePage = () => {
-  return (
-    <div className="text-4xl min-h-screen min-w-full flex items-center justify-center">
-      Hello World!
-    </div>
-  );
+  return <Button>Click me!</Button>;
 };
 
 export default HomePage;
