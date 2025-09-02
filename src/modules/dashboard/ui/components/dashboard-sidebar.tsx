@@ -40,16 +40,14 @@ const secondSection = [
 export const DashboardSidebar = () => {
   return (
     <Sidebar>
-      <SidebarHeader className="text-sidebar accent-foreground">
-        <Link href={"/"}>
+      <SidebarHeader className="accent-foreground">
+        <Link href={"/"} className="flex items-center gap-2">
           <Image src={"/logo.svg"} alt={"logo"} height={36} width={36} />
           <p className="text-2xl font-semibold">Personae AI</p>
         </Link>
-
         <div className="px-4 py-2">
           <SidebarSeparator className="opacity-10 text-[#5D6B68]" />
         </div>
-
         <SidebarContent>
           <SidebarGroup>
             <SidebarGroupContent>
