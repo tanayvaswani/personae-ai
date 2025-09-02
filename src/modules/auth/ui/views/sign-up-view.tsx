@@ -1,6 +1,7 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -37,6 +38,7 @@ const formSchema = z
   });
 
 export const SignUpView = () => {
+  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<boolean>(false);
 
@@ -62,7 +64,9 @@ export const SignUpView = () => {
         callbackURL: "/",
       },
       {
-        onSuccess: () => {},
+        onSuccess: () => {
+          router.push("/");
+        },
         onError: ({ error }) => {
           setError(error.message);
         },

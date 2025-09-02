@@ -18,7 +18,7 @@ export const metadata: Metadata = {
   description: "Welcome to Personae AI",
 };
 
-const RootLayout = ({
+const Layout = ({
   children,
 }: Readonly<{
   children: React.ReactNode;
@@ -34,4 +34,4 @@ const RootLayout = ({
   );
 };
 
-export default RootLayout;
+export default Layout;
