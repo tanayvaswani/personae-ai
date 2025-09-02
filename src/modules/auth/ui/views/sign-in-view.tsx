@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { OctagonAlert } from "lucide-react";
+import { Loader2, OctagonAlert } from "lucide-react";
 import Link from "next/link";
 
 import { authClient } from "@/lib/auth-client";
@@ -31,6 +31,7 @@ const formSchema = z.object({
 export const SignInView = () => {
   const router = useRouter();
   const [error, setError] = useState<string | null>(null);
+  const [pending, setPending] = useState<boolean>(false);
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -42,6 +43,7 @@ export const SignInView = () => {
 
   const onSubmit = (data: z.infer<typeof formSchema>) => {
     setError(null);
+    setPending(true);
 
     authClient.signIn.email(
       {
@@ -50,6 +52,7 @@ export const SignInView = () => {
       },
       {
         onSuccess: () => {
+          setPending(false);
           router.push("/");
         },
         onError: ({ error }) => {
@@ -61,7 +64,7 @@ export const SignInView = () => {
 
   return (
     <div className="flex flex-col gap-6">
-      <Card className="overflow-hidden p-0">
+      <Card className="overflow-hidden p-0 border-none shadow-lg">
         <CardContent className="grid p-0 md:grid-cols-2">
           <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="p-6 md:p-8">
@@ -115,8 +118,12 @@ export const SignInView = () => {
                     <AlertTitle>{error}</AlertTitle>
                   </Alert>
                 )}
-                <Button type={"submit"} className="w-full">
-                  Sign In
+                <Button type={"submit"} disabled={pending} className="w-full">
+                  {pending ? (
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                  ) : (
+                    "Sign In"
+                  )}
                 </Button>
                 <div className="after:border-border relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t">
                   <span className="bg-card text-muted-foreground relative z-10 px-2">
@@ -126,6 +133,7 @@ export const SignInView = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <Button
                     type={"button"}
+                    disabled={pending}
                     className="w-full"
                     variant={"outline"}
                   >
@@ -133,6 +141,7 @@ export const SignInView = () => {
                   </Button>
                   <Button
                     type={"button"}
+                    disabled={pending}
                     className="w-full"
                     variant={"outline"}
                   >
@@ -152,9 +161,12 @@ export const SignInView = () => {
             </form>
           </Form>
 
-          <div className="bg-radial from-green-700 to-green-900 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
+          <div className="bg-radial from-blue-200 to-blue-400 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
             <img src={"logo.svg"} alt={"logo"} className="h-[92px] w-[92px]" />
-            <p className="text-2xl font-semibold text-white">Personae AI</p>
+            <p className="text-2xl font-semibold text-black">Personae AI</p>
+            <p className="text-sm italic text-center">
+              Empower your imagination <br /> with Personalized Characters.
+            </p>
           </div>
         </CardContent>
       </Card>
