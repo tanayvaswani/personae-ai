@@ -1,10 +1,9 @@
 "use client";
 
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
 import { Loader, OctagonAlert } from "lucide-react";
 import Link from "next/link";
 
@@ -38,7 +37,6 @@ const formSchema = z
   });
 
 export const SignUpView = () => {
-  const router = useRouter();
   const [error, setError] = useState<string | null>(null);
   const [pending, setPending] = useState<boolean>(false);
 
@@ -61,11 +59,31 @@ export const SignUpView = () => {
         name: data.name,
         email: data.email,
         password: data.password,
+        callbackURL: "/",
       },
       {
-        onSuccess: () => {
-          router.push("/sign-in");
+        onSuccess: () => {},
+        onError: ({ error }) => {
+          setError(error.message);
         },
+        onResponse: () => {
+          setPending(false);
+        },
+      }
+    );
+  };
+
+  const onSocial = (socialProvider: "github" | "google") => {
+    setError(null);
+    setPending(true);
+
+    authClient.signIn.social(
+      {
+        provider: socialProvider,
+        callbackURL: "/",
+      },
+      {
+        onSuccess: () => {},
         onError: ({ error }) => {
           setError(error.message);
         },
@@ -182,6 +200,7 @@ export const SignUpView = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <Button
                     type={"button"}
+                    onClick={() => onSocial("google")}
                     disabled={pending}
                     className="w-full"
                     variant={"outline"}
@@ -190,6 +209,7 @@ export const SignUpView = () => {
                   </Button>
                   <Button
                     type={"button"}
+                    onClick={() => onSocial("github")}
                     disabled={pending}
                     className="w-full"
                     variant={"outline"}
