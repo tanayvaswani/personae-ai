@@ -6,6 +6,7 @@ import { useState } from "react";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader, OctagonAlert } from "lucide-react";
+import { FaGithub, FaGoogle } from "react-icons/fa";
 import Link from "next/link";
 
 import { authClient } from "@/lib/auth-client";
@@ -209,7 +210,7 @@ export const SignUpView = () => {
                     className="w-full"
                     variant={"outline"}
                   >
-                    Google
+                    <FaGoogle />
                   </Button>
                   <Button
                     type={"button"}
@@ -218,7 +219,7 @@ export const SignUpView = () => {
                     className="w-full"
                     variant={"outline"}
                   >
-                    GitHub
+                    <FaGithub />
                   </Button>
                 </div>
                 <div className="text-center text-sm">
