@@ -5,7 +5,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { Loader2, OctagonAlert } from "lucide-react";
+import { Loader, OctagonAlert } from "lucide-react";
 import Link from "next/link";
 
 import { authClient } from "@/lib/auth-client";
@@ -52,11 +52,13 @@ export const SignInView = () => {
       },
       {
         onSuccess: () => {
-          setPending(false);
           router.push("/");
         },
         onError: ({ error }) => {
           setError(error.message);
+        },
+        onResponse: () => {
+          setPending(false);
         },
       }
     );
@@ -64,6 +66,13 @@ export const SignInView = () => {
 
   return (
     <div className="flex flex-col gap-6">
+      {!!error && (
+        <Alert className="bg-destructive/10 border-none">
+          <OctagonAlert className="h-4 w-4 !text-destructive" />
+          <AlertTitle>{error}</AlertTitle>
+        </Alert>
+      )}
+
       <Card className="overflow-hidden p-0 border-none shadow-lg">
         <CardContent className="grid p-0 md:grid-cols-2">
           <Form {...form}>
@@ -112,15 +121,9 @@ export const SignInView = () => {
                     )}
                   />
                 </div>
-                {!!error && (
-                  <Alert className="bg-destructive/10 border-none">
-                    <OctagonAlert className="h-4 w-4 !text-destructive" />
-                    <AlertTitle>{error}</AlertTitle>
-                  </Alert>
-                )}
                 <Button type={"submit"} disabled={pending} className="w-full">
                   {pending ? (
-                    <Loader2 className="h-4 w-4 animate-spin" />
+                    <Loader className="h-4 w-4 animate-spin" />
                   ) : (
                     "Sign In"
                   )}
