@@ -57,6 +57,7 @@ export const DashboardSidebar = () => {
                   <SidebarMenuItem key={item.href}>
                     <SidebarMenuButton>
                       <Link href={item.href}>
+                        <item.icon className="size-5" />
                         <span className="text-sm font-medium tracking-tight">
                           {item.label}
                         </span>
