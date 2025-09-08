@@ -1,5 +1,9 @@
 "use client";
 
+import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+
 import {
   Sidebar,
   SidebarContent,
@@ -12,9 +16,6 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
-import { BotIcon, StarIcon, VideoIcon } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
 
 const firstSection = [
   {
