@@ -162,7 +162,7 @@ export const SignInView = () => {
                     type={"button"}
                     onClick={() => onSocial("google")}
                     disabled={pending}
-                    className="w-full"
+                    className="w-full cursor-pointer"
                     variant={"outline"}
                   >
                     <FaGoogle />
@@ -171,7 +171,7 @@ export const SignInView = () => {
                     type={"button"}
                     onClick={() => onSocial("github")}
                     disabled={pending}
-                    className="w-full"
+                    className="w-full cursor-pointer"
                     variant={"outline"}
                   >
                     <FaGithub />
@@ -190,9 +190,9 @@ export const SignInView = () => {
             </form>
           </Form>
 
-          <div className="bg-radial from-blue-200 to-blue-400 relative hidden md:flex flex-col gap-y-4 items-center justify-center">
+          <div className="bg-radial from-primary to-primary/60 relative hidden md:flex flex-col gap-y-4 items-center justify-center text-black">
             <img src={"logo.svg"} alt={"logo"} className="h-[92px] w-[92px]" />
-            <p className="text-2xl font-semibold text-black">Personae AI</p>
+            <p className="text-2xl font-semibold">Personae AI</p>
             <p className="text-sm italic text-center">
               Empower your imagination <br /> with Personalized Characters.
             </p>
