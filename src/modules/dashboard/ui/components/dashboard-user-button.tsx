@@ -1,4 +1,8 @@
+import { useRouter } from "next/navigation";
+import { ChevronDownIcon, CreditCardIcon, LogOutIcon } from "lucide-react";
+
 import { authClient } from "@/lib/auth-client";
+import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -7,11 +11,22 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
 import GeneratedAvatar from "@/components/generated-avatar";
 
 export const DashboardUserButton = () => {
+  const router = useRouter();
+
   const { data, isPending } = authClient.useSession();
+
+  const onLogout = () => {
+    authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/sign-in");
+        },
+      },
+    });
+  };
 
   if (isPending || !data?.user) {
     return null;
@@ -32,8 +47,34 @@ export const DashboardUserButton = () => {
           />
         )}
 
-        {data.user.name}
+        <div className="flex flex-col gap-0.5 text-left overflow-hidden flex-1 min-w-0">
+          <p className="text-sm truncate w-full">{data.user.name}</p>
+          <p className="text-xs truncate w-full">{data.user.email}</p>
+        </div>
+
+        <ChevronDownIcon className="size-4 shrink-0" />
       </DropdownMenuTrigger>
+
+      <DropdownMenuContent align="end" side="right" className="w-72">
+        <DropdownMenuLabel>
+          <div className="flex flex-col gap-1">
+            <span className="font-medium truncate">{data.user.name}</span>
+            <span className="text-sm font-normal text-muted-foreground truncate">
+              {data.user.email}
+            </span>
+          </div>
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="cursor-pointer flex items-center justify-between">
+          Billing <CreditCardIcon className="size-4" />
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          onClick={() => onLogout()}
+          className="cursor-pointer flex items-center justify-between"
+        >
+          Logout <LogOutIcon className="size-4" />
+        </DropdownMenuItem>
+      </DropdownMenuContent>
     </DropdownMenu>
   );
 };
