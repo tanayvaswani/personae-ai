@@ -10,7 +10,7 @@ export const HomeView = () => {
   const { data: session } = authClient.useSession();
 
   return (
-    <div className="flex flex-col text-2xl max-w-3xl">
+    <div className="flex flex-col text-2xl w-full p-3">
       <p>Logged in as {session?.user.name}</p>
 
       <Button
