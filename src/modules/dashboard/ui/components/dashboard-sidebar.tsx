@@ -16,6 +16,7 @@ import {
   SidebarMenuItem,
   SidebarSeparator,
 } from "@/components/ui/sidebar";
+import { cn } from "@/lib/utils";
 
 const firstSection = [
   {
@@ -55,7 +56,12 @@ export const DashboardSidebar = () => {
               <SidebarMenu>
                 {firstSection.map((item) => (
                   <SidebarMenuItem key={item.href}>
-                    <SidebarMenuButton>
+                    <SidebarMenuButton
+                      className={cn(
+                        "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar"
+                      )}
+                      asChild
+                    >
                       <Link href={item.href}>
                         <item.icon className="size-5" />
                         <span className="text-sm font-medium tracking-tight">
