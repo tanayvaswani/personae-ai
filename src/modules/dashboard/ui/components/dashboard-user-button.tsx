@@ -34,7 +34,7 @@ export const DashboardUserButton = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="rounded-lg border border-border/10 p-3 w-full flex items-center justify-start bg-white/5 hover:bg-white/10 overflow-hidden gap-3">
+      <DropdownMenuTrigger className="rounded-lg border border-border/10 p-3 w-full flex items-center justify-start bg-black/5 hover:bg-black/10 overflow-hidden gap-3">
         {data.user.image ? (
           <Avatar>
             <AvatarImage src={data.user.image} />
@@ -55,7 +55,11 @@ export const DashboardUserButton = () => {
         <ChevronDownIcon className="size-4 shrink-0" />
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent align="end" side="right" className="w-72">
+      <DropdownMenuContent
+        align="end"
+        side="right"
+        className="w-72 border-border"
+      >
         <DropdownMenuLabel>
           <div className="flex flex-col gap-1">
             <span className="font-medium truncate">{data.user.name}</span>

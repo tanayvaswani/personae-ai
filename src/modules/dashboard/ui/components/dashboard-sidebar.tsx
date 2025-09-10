@@ -45,16 +45,22 @@ export const DashboardSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <Sidebar>
+    <Sidebar className="border-border">
       <SidebarHeader>
         <Link href={"/"} className="flex items-center gap-2 p-3">
-          <Image src={"/logo.svg"} alt={"logo"} height={36} width={36} />
+          <Image
+            src={"/logo.svg"}
+            alt={"logo"}
+            height={36}
+            width={36}
+            className="invert"
+          />
           <p className="text-2xl font-semibold">Personae AI</p>
         </Link>
-        <div className="px-4 py-2">
-          <SidebarSeparator className="opacity-10 text-[#5D6B68]" />
-        </div>
       </SidebarHeader>
+      <div className="px-4 py-2">
+        <SidebarSeparator className="opacity-10 bg-primary mx-0" />
+      </div>
       <SidebarContent>
         <SidebarGroup>
           <SidebarGroupContent>
@@ -63,7 +69,7 @@ export const DashboardSidebar = () => {
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton
                     className={cn(
-                      "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar",
+                      "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar from-5% via-30% via-sidebar/50 to-sidebar",
                       pathname === item.href &&
                         "bg-linear-to-r/oklch border-[#5D6B68]/10"
                     )}
@@ -83,7 +89,7 @@ export const DashboardSidebar = () => {
           </SidebarGroupContent>
         </SidebarGroup>
         <div className="px-4 py-2">
-          <SidebarSeparator className="opacity-10 text-[#5D6B68]" />
+          <SidebarSeparator className="opacity-10 bg-primary mx-0" />
         </div>
         <SidebarGroup>
           <SidebarGroupContent>
@@ -92,7 +98,7 @@ export const DashboardSidebar = () => {
                 <SidebarMenuItem key={item.href}>
                   <SidebarMenuButton
                     className={cn(
-                      "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar-accent from-5% via-30% via-sidebar/50 to-sidebar",
+                      "h-10 hover:bg-linear-to-r/oklch border border-transparent hover:border-[#5D6B68]/10 from-sidebar from-5% via-30% via-sidebar/50 to-sidebar",
                       pathname === item.href &&
                         "bg-linear-to-r/oklch border-[#5D6B68]/10"
                     )}
