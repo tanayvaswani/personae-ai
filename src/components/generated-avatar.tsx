@@ -1,5 +1,7 @@
-import { createAvatar } from "@dicebear/core";
 import { botttsNeutral, initials } from "@dicebear/collection";
+import { createAvatar } from "@dicebear/core";
+
+import { cn } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface GeneratedAvatarProps {
@@ -28,7 +30,7 @@ const GeneratedAvatar = ({
   }
 
   return (
-    <Avatar>
+    <Avatar className={cn(className)}>
       <AvatarImage src={avatar.toDataUri()} alt="avatar" />
       <AvatarFallback>{seed.charAt(0).toUpperCase()}</AvatarFallback>
     </Avatar>
