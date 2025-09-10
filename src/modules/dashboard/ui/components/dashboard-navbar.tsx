@@ -5,13 +5,15 @@ import { PanelLeftCloseIcon, PanelLeftIcon, SearchIcon } from "lucide-react";
 import { useSidebar } from "@/components/ui/sidebar";
 import { Button } from "@/components/ui/button";
 import { DashboardCommand } from "./dashboard-command";
+import { useState } from "react";
 
 export const DashboardNavbar = () => {
   const { state, toggleSidebar, isMobile } = useSidebar();
+  const [commandOpen, setCommandOpen] = useState<boolean>(false);
 
   return (
     <>
-      <DashboardCommand />
+      <DashboardCommand open={commandOpen} setOpen={setCommandOpen} />
       <nav className="flex px-4 gap-x-2 py-3">
         <Button className="size-9" variant={"ghost"} onClick={toggleSidebar}>
           {state === "collapsed" || isMobile ? (
@@ -25,7 +27,7 @@ export const DashboardNavbar = () => {
           className="h-9 w-[240px] flex items-center justify-start font-normal text-muted-foreground hover:text-muted-foreground"
           variant={"outline"}
           size={"sm"}
-          onClick={() => {}}
+          onClick={() => setCommandOpen((open) => !open)}
         >
           <SearchIcon />
           Search
