@@ -34,8 +34,28 @@ export const ResponsiveDialog = ({
   const isMobile = useIsMobile();
 
   if (isMobile) {
-    return <Drawer></Drawer>;
+    return (
+      <Drawer open={open} onOpenChange={onOpenChange}>
+        <DrawerContent>
+          <DrawerHeader>
+            <DrawerTitle>{title}</DrawerTitle>
+            <DrawerDescription>{description}</DrawerDescription>
+          </DrawerHeader>
+          <div className="p-4">{children}</div>
+        </DrawerContent>
+      </Drawer>
+    );
   }
 
-  return <Dialog></Dialog>;
+  return (
+    <Dialog open={open}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
+        {children}
+      </DialogContent>
+    </Dialog>
+  );
 };
