@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 
 import {
-  CommandResponsiveDialog,
   CommandInput,
   CommandItem,
   CommandList,
+  CommandResponsiveDialog,
 } from "@/components/ui/command";
 
 interface DashboardCommandProps {
