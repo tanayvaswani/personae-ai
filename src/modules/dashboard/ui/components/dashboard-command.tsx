@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction } from "react";
 
 import {
-  CommandDialog,
+  CommandResponsiveDialog,
   CommandInput,
   CommandItem,
   CommandList,
@@ -14,7 +14,11 @@ interface DashboardCommandProps {
 
 export const DashboardCommand = ({ open, setOpen }: DashboardCommandProps) => {
   return (
-    <CommandDialog open={open} onOpenChange={setOpen} className="border-border">
+    <CommandResponsiveDialog
+      open={open}
+      onOpenChange={setOpen}
+      className="border-border"
+    >
       <CommandInput
         className="border-border"
         placeholder="Find a meeting or agent..."
@@ -23,6 +27,6 @@ export const DashboardCommand = ({ open, setOpen }: DashboardCommandProps) => {
         <CommandItem>Test1</CommandItem>
         <CommandItem>Test2</CommandItem>
       </CommandList>
-    </CommandDialog>
+    </CommandResponsiveDialog>
   );
 };
