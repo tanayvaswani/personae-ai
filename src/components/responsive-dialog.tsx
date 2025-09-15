@@ -24,4 +24,18 @@ interface ResponsiveDialogProps {
   onOpenChange: (open: boolean) => void;
 }
 
-export const ResponsiveDiaglog = ({}: ResponsiveDialogProps) => {};
+export const ResponsiveDialog = ({
+  title,
+  description,
+  children,
+  open,
+  onOpenChange,
+}: ResponsiveDialogProps) => {
+  const isMobile = useIsMobile();
+
+  if (isMobile) {
+    return <Drawer></Drawer>;
+  }
+
+  return <Dialog></Dialog>;
+};
