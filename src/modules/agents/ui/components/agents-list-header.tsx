@@ -1,6 +1,6 @@
 "use client";
 
-import { NewAgentDialog } from "@/components/new-agent-dialog";
+import { NewAgentDialog } from "@/modules/agents/ui/components/new-agent-dialog";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
