@@ -4,6 +4,7 @@ import { Suspense } from "react";
 
 import { getQueryClient, trpc } from "@/trpc/server";
 
+import { AgentsListHeader } from "@/modules/agents/ui/agents-list-header";
 import {
   AgentsView,
   AgentsViewError,
@@ -15,13 +16,16 @@ const Page = () => {
   void queryClient.prefetchQuery(trpc.agents.getMany.queryFilter());
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense fallback={<AgentsViewLoading />}>
-        <ErrorBoundary fallback={<AgentsViewError />}>
-          <AgentsView />
-        </ErrorBoundary>
-      </Suspense>
-    </HydrationBoundary>
+    <>
+      <AgentsListHeader />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <Suspense fallback={<AgentsViewLoading />}>
+          <ErrorBoundary fallback={<AgentsViewError />}>
+            <AgentsView />
+          </ErrorBoundary>
+        </Suspense>
+      </HydrationBoundary>
+    </>
   );
 };
 
