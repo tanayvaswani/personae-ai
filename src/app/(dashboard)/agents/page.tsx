@@ -4,12 +4,12 @@ import { Suspense } from "react";
 
 import { getQueryClient, trpc } from "@/trpc/server";
 
-import { AgentsListHeader } from "@/modules/agents/ui/agents-list-header";
+import { AgentsListHeader } from "@/modules/agents/ui/components/agents-list-header";
 import {
   AgentsView,
   AgentsViewError,
   AgentsViewLoading,
-} from "@/modules/agents/ui/agents-view";
+} from "@/modules/agents/ui/components/agents-view";
 
 const Page = () => {
   const queryClient = getQueryClient();
