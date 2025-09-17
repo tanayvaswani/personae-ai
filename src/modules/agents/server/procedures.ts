@@ -1,3 +1,6 @@
+import { eq } from "drizzle-orm";
+import { z } from "zod";
+
 import { agents } from "@/db/schema";
 import { agentsInsertSchema } from "../schema";
 import {
@@ -8,6 +11,15 @@ import {
 import { db } from "@/db";
 
 export const agentsRouter = createTRPCRouter({
+  getOne: baseProcedure
+    .input(z.object({ id: z.string() }))
+    .query(async ({ input }) => {
+      const data = await db
+        .select()
+        .from(agents)
+        .where(eq(agents.id, input.id));
+      return data;
+    }),
   getMany: baseProcedure.query(async () => {
     const data = await db.select().from(agents);
     return data;
