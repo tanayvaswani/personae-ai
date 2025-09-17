@@ -116,7 +116,6 @@ export const AgentForm = ({
             </FormItem>
           )}
         />
-
         <div className="flex justify-between gap-2">
           {onCancel && (
             <Button
