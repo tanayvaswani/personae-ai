@@ -6,6 +6,7 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { Loader } from "lucide-react";
 
 import { agentsInsertSchema } from "../../schema";
 import { useTRPC } from "@/trpc/client";
@@ -71,15 +72,15 @@ export const AgentForm = ({
 
   const onSubmit = (values: z.infer<typeof agentsInsertSchema>) => {
     if (isEdit) {
-      //
+      console.log(values);
     } else {
-      //
+      createAgent.mutate(values);
     }
   };
 
   return (
     <Form {...form}>
-      <form className="" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
         <GeneratedAvatar
           seed={form.watch("name")}
           variant={"botttsNeutral"}
@@ -116,19 +117,31 @@ export const AgentForm = ({
             </FormItem>
           )}
         />
-        <div className="flex justify-between gap-2">
+        <div className="flex justify-between gap-2 max-w-full">
           {onCancel && (
             <Button
-              variant={"ghost"}
+              variant={"outline"}
               type={"button"}
               disabled={isPending}
               onClick={() => onCancel()}
+              className="w-1/2"
             >
               Cancel
             </Button>
           )}
-          <Button variant={"default"} type={"submit"} disabled={isPending}>
-            {isEdit ? "Update" : "Create"}
+          <Button
+            variant={"default"}
+            type={"submit"}
+            disabled={isPending}
+            className="w-1/2"
+          >
+            {isPending ? (
+              <Loader className="size-4 animate-spin" />
+            ) : isEdit ? (
+              "Update"
+            ) : (
+              "Create"
+            )}
           </Button>
         </div>
       </form>
