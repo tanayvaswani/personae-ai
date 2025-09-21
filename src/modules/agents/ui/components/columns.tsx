@@ -1,11 +1,12 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import { CornerDownRight } from "lucide-react";
+import { CornerDownRight, VideoIcon } from "lucide-react";
 
 import { AgentGetOne } from "../../types";
 
 import GeneratedAvatar from "@/components/generated-avatar";
+import { Badge } from "@/components/ui/badge";
 
 export const columns: ColumnDef<AgentGetOne>[] = [
   {
@@ -29,6 +30,21 @@ export const columns: ColumnDef<AgentGetOne>[] = [
           </span>
         </div>
       </div>
+    ),
+  },
+  {
+    accessorKey: "meetingCount",
+    header: "Meetings",
+    cell: ({ row }) => (
+      <Badge
+        className="flex items-center gap-x-2 [&>svg]:size-2"
+        variant={"outline"}
+      >
+        <VideoIcon className="text-blue-700" />
+        {/* {row.original.meetingCount}{" "}
+        {row.original.meetingCount === 1 ? "meeting" : "meetings"} */}
+        5 meetings
+      </Badge>
     ),
   },
 ];
