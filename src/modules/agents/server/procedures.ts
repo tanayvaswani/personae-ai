@@ -17,18 +17,27 @@ export const agentsRouter = createTRPCRouter({
         })
         .from(agents)
         .where(eq(agents.id, input.id));
-
       return existingAgent;
     }),
-  getMany: protectedProcedure.query(async () => {
-    const data = await db
-      .select({
-        ...getTableColumns(agents),
-        meetingCount: sql<number>`5`,
-      })
-      .from(agents);
-    return data;
-  }),
+  getMany: protectedProcedure
+    .input(
+      z
+        .object({
+          page: z.number().default(1),
+          pageSize: z.number().min(1).max(100).default(10),
+          search: z.string().nullish(),
+        })
+        .optional()
+    )
+    .query(async () => {
+      const data = await db
+        .select({
+          ...getTableColumns(agents),
+          meetingCount: sql<number>`6`,
+        })
+        .from(agents);
+      return data;
+    }),
   create: protectedProcedure
     .input(agentsInsertSchema)
     .mutation(async ({ input, ctx }) => {
