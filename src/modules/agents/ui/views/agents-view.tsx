@@ -2,16 +2,19 @@
 
 import { useSuspenseQuery } from "@tanstack/react-query";
 
+import { columns } from "../components/columns";
+import { getManyAgentsPreFetchQueryOptions } from "@/prefetch";
 import { useTRPC } from "@/trpc/client";
 import { DataTable } from "../components/data-table";
+import { EmptyState } from "@/components/empty-state";
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
-import { columns } from "../components/columns";
-import { EmptyState } from "@/components/empty-state";
 
 export const AgentsView = () => {
   const trpc = useTRPC();
-  const { data } = useSuspenseQuery(trpc.agents.getMany.queryOptions({}));
+  const { data } = useSuspenseQuery(
+    trpc.agents.getMany.queryOptions(getManyAgentsPreFetchQueryOptions)
+  );
 
   return (
     <div className="flex-1 pb-4 px-4 md:px-8 flex flex-col gap-y-4">

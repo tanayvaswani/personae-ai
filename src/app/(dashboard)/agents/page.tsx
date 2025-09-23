@@ -5,6 +5,7 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Suspense } from "react";
 
 import { auth } from "@/lib/auth";
+import { getManyAgentsPreFetchQueryOptions } from "@/prefetch";
 import { getQueryClient, trpc } from "@/trpc/server";
 
 import { AgentsListHeader } from "@/modules/agents/ui/components/agents-list-header";
@@ -24,7 +25,9 @@ const Page = async () => {
   }
 
   const queryClient = getQueryClient();
-  void queryClient.prefetchQuery(trpc.agents.getMany.queryFilter({}));
+  void queryClient.prefetchQuery(
+    trpc.agents.getMany.queryFilter(getManyAgentsPreFetchQueryOptions)
+  );
 
   return (
     <>
