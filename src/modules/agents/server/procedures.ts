@@ -1,4 +1,4 @@
-import { and, eq, getTableColumns, ilike, sql } from "drizzle-orm";
+import { and, count, desc, eq, getTableColumns, ilike, sql } from "drizzle-orm";
 import { z } from "zod";
 
 import { agents } from "@/db/schema";
@@ -38,6 +38,8 @@ export const agentsRouter = createTRPCRouter({
       })
     )
     .query(async ({ ctx, input }) => {
+      const { page, pageSize, search } = input;
+
       const data = await db
         .select({
           ...getTableColumns(agents),
@@ -47,10 +49,30 @@ export const agentsRouter = createTRPCRouter({
         .where(
           and(
             eq(agents.userId, ctx.auth.user.id),
-            input.search ? ilike(agents.name, `%${input.search}`) : undefined
+            search ? ilike(agents.name, `%${search}`) : undefined
+          )
+        )
+        .orderBy(desc(agents.createdAt), desc(agents.id))
+        .limit(pageSize)
+        .offset((page - 1) * pageSize);
+
+      const [total] = await db
+        .select({ count: count() })
+        .from(agents)
+        .where(
+          and(
+            eq(agents.userId, ctx.auth.user.id),
+            search ? ilike(agents.name, `%${search}`) : undefined
           )
         );
-      return data;
+
+      const totalPages = Math.ceil(total.count / pageSize);
+
+      return {
+        items: data,
+        total: total.count,
+        totalPages: totalPages,
+      };
     }),
   create: protectedProcedure
     .input(agentsInsertSchema)
