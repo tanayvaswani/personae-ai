@@ -3,7 +3,7 @@
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { columns } from "../components/columns";
-import { getManyAgentsPreFetchQueryOptions } from "@/prefetch";
+import { useAgentsFilters } from "../../hooks/use-agents-filters";
 import { useTRPC } from "@/trpc/client";
 import { DataTable } from "../components/data-table";
 import { EmptyState } from "@/components/empty-state";
@@ -11,9 +11,13 @@ import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
 
 export const AgentsView = () => {
+  const [filters, setFilters] = useAgentsFilters();
+
   const trpc = useTRPC();
   const { data } = useSuspenseQuery(
-    trpc.agents.getMany.queryOptions(getManyAgentsPreFetchQueryOptions)
+    trpc.agents.getMany.queryOptions({
+      ...filters,
+    })
   );
 
   return (
