@@ -5,6 +5,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import Link from "next/link";
 
 interface Props {
   agentId: string;
@@ -20,6 +21,16 @@ export const AgentIdViewHeader = ({
   onRemove,
 }: Props) => {
   return (
-    <div className="flex items-center justify-between">AgentIdViewHeader</div>
+    <div className="flex items-center justify-between">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href={"/agents"}>My Agents</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
+    </div>
   );
 };
