@@ -1,3 +1,5 @@
+"use client";
+
 import { useSuspenseQuery } from "@tanstack/react-query";
 
 import { useTRPC } from "@/trpc/client";
@@ -16,7 +18,12 @@ export const AgentIdView = ({ agentId }: Props) => {
 
   return (
     <div className="flex-1 py-4 px-4 md:px-8 flex flex-col gap-y-4">
-      {JSON.stringify(data, null, 2)}
+      <AgentIdViewHeader
+        agentId={agentId}
+        agentName={data.name}
+        onEdit={() => {}}
+        onRemove={() => {}}
+      />
     </div>
   );
 };
