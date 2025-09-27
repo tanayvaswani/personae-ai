@@ -5,6 +5,11 @@ interface Props {
   onRemove: () => void;
 }
 
-export const AgentIdViewHeader = () => {
+export const AgentIdViewHeader = ({
+  agentId,
+  agentName,
+  onEdit,
+  onRemove,
+}: Props) => {
   return <div>AgentIdViewHeader</div>;
 };
