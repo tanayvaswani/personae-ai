@@ -11,5 +11,7 @@ export const AgentIdViewHeader = ({
   onEdit,
   onRemove,
 }: Props) => {
-  return <div>AgentIdViewHeader</div>;
+  return (
+    <div className="flex items-center justify-between">AgentIdViewHeader</div>
+  );
 };
