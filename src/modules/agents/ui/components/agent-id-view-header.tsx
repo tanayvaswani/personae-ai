@@ -1,12 +1,25 @@
 import {
+  ChevronRightIcon,
+  TrashIcon,
+  PencilIcon,
+  MoreVerticalIcon,
+} from "lucide-react";
+import Link from "next/link";
+
+import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
-import { ChevronRightIcon } from "lucide-react";
-import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuTrigger,
+  DropdownMenuItem,
+  DropdownMenuContent,
+} from "@/components/ui/dropdown-menu";
 
 interface Props {
   agentId: string;
@@ -40,6 +53,24 @@ export const AgentIdViewHeader = ({
           </BreadcrumbItem>
         </BreadcrumbList>
       </Breadcrumb>
+
+      <DropdownMenu modal={false}>
+        <DropdownMenuTrigger>
+          <Button variant={"ghost"} asChild>
+            <MoreVerticalIcon />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align={"end"}>
+          <DropdownMenuItem onClick={onEdit}>
+            <PencilIcon className="size-4 text-white" />
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem onClick={onRemove}>
+            <TrashIcon className="size-4 text-white" />
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
     </div>
   );
 };
