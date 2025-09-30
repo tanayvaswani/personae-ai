@@ -5,6 +5,7 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from "@/components/ui/breadcrumb";
+import { ChevronRightIcon } from "lucide-react";
 import Link from "next/link";
 
 interface Props {
@@ -29,6 +30,9 @@ export const AgentIdViewHeader = ({
               <Link href={"/agents"}>My Agents</Link>
             </BreadcrumbLink>
           </BreadcrumbItem>
+          <BreadcrumbSeparator>
+            <ChevronRightIcon className="text-foreground text-xl font-medium [&>svg]:size-4" />
+          </BreadcrumbSeparator>
         </BreadcrumbList>
       </Breadcrumb>
     </div>
