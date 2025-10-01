@@ -45,7 +45,7 @@ export const DashboardSidebar = () => {
   const pathname = usePathname();
 
   return (
-    <Sidebar className="border-border shadow-xl">
+    <Sidebar className="bg-black/10 border-border shadow-xl">
       <SidebarHeader>
         <Link href={"/"} className="flex items-center gap-2 p-3">
           <Image
