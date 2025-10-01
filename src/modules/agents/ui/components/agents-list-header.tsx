@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { XCircleIcon } from "lucide-react";
 
-import { useAgentsFilters } from "../../hooks/use-agents-filters";
-import { AgentsSearchFilters } from "./agents-search-filter";
 import { Button } from "@/components/ui/button";
 import { NewAgentDialog } from "@/modules/agents/ui/components/new-agent-dialog";
 import { DEFAULT_PAGE } from "@/constants";
+
+import { useAgentsFilters } from "../../hooks/use-agents-filters";
+import { AgentsSearchFilters } from "./agents-search-filter";
 
 export const AgentsListHeader = () => {
   const [filters, setFilters] = useAgentsFilters();

@@ -3,14 +3,15 @@
 import { useRouter } from "next/navigation";
 import { useSuspenseQuery } from "@tanstack/react-query";
 
-import { columns } from "../components/columns";
-import { useAgentsFilters } from "../../hooks/use-agents-filters";
 import { useTRPC } from "@/trpc/client";
-import { DataPagination } from "../components/data-pagination";
-import { DataTable } from "../components/data-table";
 import { EmptyState } from "@/components/empty-state";
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
+
+import { columns } from "../components/columns";
+import { useAgentsFilters } from "../../hooks/use-agents-filters";
+import { DataPagination } from "../components/data-pagination";
+import { DataTable } from "../components/data-table";
 
 export const AgentsView = () => {
   const [filters, setFilters] = useAgentsFilters();

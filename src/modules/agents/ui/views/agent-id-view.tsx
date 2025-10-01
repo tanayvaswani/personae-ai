@@ -10,13 +10,14 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { VideoIcon } from "lucide-react";
 
-import { useConfirm } from "../../hooks/use-confirm";
 import { useTRPC } from "@/trpc/client";
-import { AgentIdViewHeader } from "../components/agent-id-view-header";
 import { Badge } from "@/components/ui/badge";
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
 import GeneratedAvatar from "@/components/generated-avatar";
+
+import { useConfirm } from "../../hooks/use-confirm";
+import { AgentIdViewHeader } from "../components/agent-id-view-header";
 import { UpdateAgentDialog } from "../components/update-agent-dialog";
 
 interface Props {

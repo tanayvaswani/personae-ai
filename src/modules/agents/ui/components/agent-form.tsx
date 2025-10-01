@@ -8,9 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { Loader } from "lucide-react";
 
-import { agentsInsertSchema } from "../../schema";
 import { useTRPC } from "@/trpc/client";
-import { AgentGetOne } from "../../types";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -22,8 +20,10 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-
 import GeneratedAvatar from "@/components/generated-avatar";
+
+import { agentsInsertSchema } from "../../schema";
+import { AgentGetOne } from "../../types";
 
 interface AgentFormProps {
   onSuccess?: () => void;
