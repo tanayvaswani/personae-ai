@@ -1,4 +1,4 @@
-import { and, count, desc, eq, getTableColumns, ilike, sql } from "drizzle-orm";
+import { and, count, desc, eq, getTableColumns, ilike } from "drizzle-orm";
 import { z } from "zod";
 import { TRPCError } from "@trpc/server";
 
@@ -19,7 +19,6 @@ export const meetingsRouter = createTRPCRouter({
       const [existingMeeting] = await db
         .select({
           ...getTableColumns(meetings),
-          meetingCount: sql<number>`5`,
         })
         .from(meetings)
         .where(
@@ -51,7 +50,6 @@ export const meetingsRouter = createTRPCRouter({
       const data = await db
         .select({
           ...getTableColumns(meetings),
-          meetingCount: sql<number>`6`,
         })
         .from(meetings)
         .where(
@@ -73,7 +71,6 @@ export const meetingsRouter = createTRPCRouter({
             search ? ilike(meetings.name, `%${search}`) : undefined
           )
         );
-
       const totalPages = Math.ceil(total.count / pageSize);
 
       return {
