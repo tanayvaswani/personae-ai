@@ -1,12 +1,13 @@
 "use client";
 
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import {
   useMutation,
   useQueryClient,
   useSuspenseQuery,
 } from "@tanstack/react-query";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 import { VideoIcon } from "lucide-react";
 
 import { useConfirm } from "../../hooks/use-confirm";
@@ -16,6 +17,7 @@ import { Badge } from "@/components/ui/badge";
 import { ErrorState } from "@/components/error-state";
 import { LoadingState } from "@/components/loading-state";
 import GeneratedAvatar from "@/components/generated-avatar";
+import { UpdateAgentDialog } from "../components/update-agent-dialog";
 
 interface Props {
   agentId: string;
@@ -25,6 +27,8 @@ export const AgentIdView = ({ agentId }: Props) => {
   const router = useRouter();
   const trpc = useTRPC();
   const queryClient = useQueryClient();
+
+  const [updateAgentDialogOpen, setUpdateAgentDialogOpen] = useState(false);
 
   const { data } = useSuspenseQuery(
     trpc.agents.getOne.queryOptions({ id: agentId })
@@ -62,11 +66,16 @@ export const AgentIdView = ({ agentId }: Props) => {
   return (
     <>
       <RemoveConfirmation />
+      <UpdateAgentDialog
+        open={updateAgentDialogOpen}
+        onOpenChange={setUpdateAgentDialogOpen}
+        initialValues={data}
+      />
       <div className="flex-1 py-4 px-4 md:px-8 flex flex-col gap-y-4">
         <AgentIdViewHeader
           agentId={agentId}
           agentName={data.name}
-          onEdit={() => {}}
+          onEdit={() => setUpdateAgentDialogOpen(true)}
           onRemove={handleRemoveAgent}
         />
         <div className="bg-zinc-950 rounded-lg border">
