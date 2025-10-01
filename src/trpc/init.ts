@@ -6,7 +6,7 @@ import { auth } from "@/lib/auth";
 
 export const createTRPCContext = cache(async () => {
   /**
-   * @see: https://trpc.io/docs/server/context
+   * @see https://trpc.io/docs/server/context
    */
   return { userId: "user_123" };
 });
@@ -31,7 +31,6 @@ export const protectedProcedure = baseProcedure.use(async ({ ctx, next }) => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-
   if (!session) {
     throw new TRPCError({
       code: "UNAUTHORIZED",
@@ -39,5 +38,10 @@ export const protectedProcedure = baseProcedure.use(async ({ ctx, next }) => {
     });
   }
 
-  return next({ ctx: { ...ctx, auth: session } });
+  return next({
+    ctx: {
+      ...ctx,
+      auth: session,
+    },
+  });
 });
