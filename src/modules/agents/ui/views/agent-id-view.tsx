@@ -120,7 +120,7 @@ export const AgentIdViewLoading = () => {
 export const AgentIdViewError = () => {
   return (
     <ErrorState
-      title={"Something Loading Agent"}
+      title={"Something happened while loading agent"}
       description={"Please try again."}
     />
   );

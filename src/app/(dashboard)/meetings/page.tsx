@@ -3,7 +3,11 @@ import { ErrorBoundary } from "react-error-boundary";
 import { Suspense } from "react";
 
 import { getQueryClient, trpc } from "@/trpc/server";
-import { MeetingsView } from "@/modules/meetings/ui/views/meetings-view";
+import {
+  MeetingsView,
+  MeetingsViewError,
+  MeetingsViewLoading,
+} from "@/modules/meetings/ui/views/meetings-view";
 
 const Page = () => {
   const queryClient = getQueryClient();
@@ -11,8 +15,8 @@ const Page = () => {
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
-      <Suspense fallback={<div className="">Fallback</div>}>
-        <ErrorBoundary fallback={<div className="">ErrorFallback</div>}>
+      <Suspense fallback={<MeetingsViewLoading />}>
+        <ErrorBoundary fallback={<MeetingsViewError />}>
           <MeetingsView />
         </ErrorBoundary>
       </Suspense>
