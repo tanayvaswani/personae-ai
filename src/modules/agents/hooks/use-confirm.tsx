@@ -38,7 +38,24 @@ export const useConfirm = (
       title={title}
       description={description}
     >
-      <div className=""></div>
+      <div className="p-4 w-full flex flex-col-reverse gap-y-2 lg:flex-row gap-x-2 items-center justify-end">
+        <Button
+          onClick={handleCancel}
+          variant={"outline"}
+          className="w-full lg:w-auto"
+        >
+          Cancel
+        </Button>
+        <Button
+          onClick={handleConfirm}
+          variant={"default"}
+          className="w-full lg:w-auto"
+        >
+          Confirm
+        </Button>
+      </div>
     </ResponsiveDialog>
   );
+
+  return [ConfirmationDialog, confirm];
 };
