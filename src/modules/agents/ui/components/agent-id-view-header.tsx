@@ -55,9 +55,9 @@ export const AgentIdViewHeader = ({
       </Breadcrumb>
 
       <DropdownMenu modal={false}>
-        <DropdownMenuTrigger>
-          <Button variant={"ghost"} asChild>
-            <MoreVerticalIcon />
+        <DropdownMenuTrigger asChild>
+          <Button variant={"ghost"}>
+            <MoreVerticalIcon className="text-white" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align={"end"}>
