@@ -25,6 +25,9 @@ export const AgentIdView = ({ agentId }: Props) => {
         onEdit={() => {}}
         onRemove={() => {}}
       />
+      <div className="bg-background rounded-lg border">
+        <div className="px-4 py-5 gap-y-5 flex flex-col col-span-5"></div>
+      </div>
     </div>
   );
 };
