@@ -50,7 +50,7 @@ export const AgentIdView = ({ agentId }: Props) => {
         agentId={agentId}
         agentName={data.name}
         onEdit={() => {}}
-        onRemove={() => {}}
+        onRemove={() => removeAgent.mutate({ id: agentId })}
       />
       <div className="bg-zinc-950 rounded-lg border">
         <div className="px-4 py-5 gap-y-5 flex flex-col col-span-5">
