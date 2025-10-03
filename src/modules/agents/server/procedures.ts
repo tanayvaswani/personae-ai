@@ -129,5 +129,7 @@ export const agentsRouter = createTRPCRouter({
         .insert(agents)
         .values({ ...input, userId: ctx.auth.user.id })
         .returning();
+
+      return createdAgent;
     }),
 });
