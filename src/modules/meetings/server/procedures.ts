@@ -11,6 +11,7 @@ import {
   MAX_PAGE_SIZE,
   MIN_PAGE_SIZE,
 } from "@/constants";
+import { meetingsInsertSchema } from "../schema";
 
 export const meetingsRouter = createTRPCRouter({
   getOne: protectedProcedure
@@ -79,12 +80,14 @@ export const meetingsRouter = createTRPCRouter({
         totalPages: totalPages,
       };
     }),
-    create: protectedProcedure
-    .input(agentsInsertSchema)
+  create: protectedProcedure
+    .input(meetingsInsertSchema)
     .mutation(async ({ input, ctx }) => {
-      const [createdAgent] = await db
-        .insert(agents)
+      const [createdMeeting] = await db
+        .insert(meetings)
         .values({ ...input, userId: ctx.auth.user.id })
         .returning();
+
+      return createdMeeting;
     }),
 });
