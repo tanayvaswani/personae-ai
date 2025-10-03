@@ -79,4 +79,12 @@ export const meetingsRouter = createTRPCRouter({
         totalPages: totalPages,
       };
     }),
+    create: protectedProcedure
+    .input(agentsInsertSchema)
+    .mutation(async ({ input, ctx }) => {
+      const [createdAgent] = await db
+        .insert(agents)
+        .values({ ...input, userId: ctx.auth.user.id })
+        .returning();
+    }),
 });
