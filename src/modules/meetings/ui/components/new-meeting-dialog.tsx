@@ -1,3 +1,5 @@
+import { useRouter } from "next/navigation";
+
 import { ResponsiveDialog } from "@/components/responsive-dialog";
 
 import { MeetingForm } from "./meeting-form";
@@ -11,6 +13,8 @@ export const NewMeetingDialog = ({
   open,
   onOpenChange,
 }: NewMeetingDialogProps) => {
+  const router = useRouter();
+
   return (
     <ResponsiveDialog
       title="New Meeting"
@@ -19,7 +23,10 @@ export const NewMeetingDialog = ({
       onOpenChange={onOpenChange}
     >
       <MeetingForm
-        onSuccess={() => onOpenChange(false)}
+        onSuccess={(id) => {
+          onOpenChange(false);
+          router.push(`/meetings/${id}`);
+        }}
         onCancel={() => onOpenChange(false)}
       />
     </ResponsiveDialog>

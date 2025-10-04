@@ -26,7 +26,7 @@ import { meetingsInsertSchema } from "../../schema";
 import { MeetingGetOne } from "../../types";
 
 interface MeetingFormProps {
-  onSuccess?: () => void;
+  onSuccess?: (id?: string) => void;
   onCancel?: () => void;
   initialValues?: MeetingGetOne;
 }
@@ -57,7 +57,7 @@ export const MeetingForm = ({
 
   const updateMeeting = useMutation(
     trpc.meetings.update.mutationOptions({
-      onSuccess: async () => {
+      onSuccess: async (data) => {
         await queryClient.invalidateQueries(
           trpc.meetings.getMany.queryOptions({})
         );
@@ -68,7 +68,7 @@ export const MeetingForm = ({
           );
         }
 
-        onSuccess?.();
+        onSuccess?.(data.id);
       },
       onError: (error) => {
         toast.error(error.message);
