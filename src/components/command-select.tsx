@@ -10,6 +10,7 @@ import {
   CommandResponsiveDialog,
 } from "./ui/command";
 import {} from "@/components/ui/select";
+import { ChevronsUpDownIcon } from "lucide-react";
 
 interface Props {
   options: Array<{
@@ -34,7 +35,25 @@ const CommandSelect = ({
   isSearchable,
   className,
 }: Props) => {
-  return <div></div>;
+  const [isOpen, setIsOpen] = useState(false);
+  const selectedOptions = options.find((option) => option.value === value);
+
+  return (
+    <>
+      <Button
+        type={"button"}
+        variant={"outline"}
+        className={cn(
+          "h-9 justify-between font-normal px-2",
+          !selectedOptions ?? "text-muted-foreground",
+          className
+        )}
+      >
+        <div>{selectedOptions?.children ?? placeholder}</div>
+        <ChevronsUpDownIcon className="size-4" />
+      </Button>
+    </>
+  );
 };
 
 export default CommandSelect;
