@@ -20,8 +20,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import GeneratedAvatar from "@/components/generated-avatar";
-
 import { meetingsInsertSchema } from "../../schema";
 import { MeetingGetOne } from "../../types";
 
@@ -98,11 +96,6 @@ export const MeetingForm = ({
   return (
     <Form {...form}>
       <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-        <GeneratedAvatar
-          seed={form.watch("name")}
-          variant={"botttsNeutral"}
-          className="border size-16"
-        />
         <FormField
           name="name"
           control={form.control}
@@ -110,7 +103,7 @@ export const MeetingForm = ({
             <FormItem>
               <FormLabel>Name</FormLabel>
               <FormControl>
-                <Input placeholder={"Agent1 live discussion"} {...field} />
+                <Input placeholder={"e.g Math Consultation"} {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
