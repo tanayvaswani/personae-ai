@@ -45,13 +45,24 @@ const CommandSelect = ({
         variant={"outline"}
         className={cn(
           "h-9 justify-between font-normal px-2",
-          !selectedOptions ?? "text-muted-foreground",
+          selectedOptions ?? "text-muted-foreground",
           className
         )}
       >
         <div>{selectedOptions?.children ?? placeholder}</div>
         <ChevronsUpDownIcon className="size-4" />
       </Button>
+
+      <CommandResponsiveDialog open={isOpen} onOpenChange={setIsOpen}>
+        <CommandInput placeholder={"Search..."} onValueChange={onSearch} />
+        <CommandList>
+          <CommandEmpty>
+            <span className="text-muted-foreground text-sm">
+              No options found
+            </span>
+          </CommandEmpty>
+        </CommandList>
+      </CommandResponsiveDialog>
     </>
   );
 };
