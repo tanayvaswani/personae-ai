@@ -61,6 +61,17 @@ const CommandSelect = ({
               No options found
             </span>
           </CommandEmpty>
+          {options.map((option) => (
+            <CommandItem
+              key={option.id}
+              onSelect={() => {
+                onSelect(option.value);
+                setIsOpen(false);
+              }}
+            >
+              {option.children}
+            </CommandItem>
+          ))}
         </CommandList>
       </CommandResponsiveDialog>
     </>
