@@ -1,6 +1,8 @@
 import { ReactNode, useState } from "react";
+import { ChevronsUpDownIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+
 import { Button } from "./ui/button";
 import {
   CommandEmpty,
@@ -9,8 +11,6 @@ import {
   CommandList,
   CommandResponsiveDialog,
 } from "./ui/command";
-import {} from "@/components/ui/select";
-import { ChevronsUpDownIcon } from "lucide-react";
 
 interface Props {
   options: Array<{
@@ -54,7 +54,11 @@ const CommandSelect = ({
         <ChevronsUpDownIcon className="size-4" />
       </Button>
 
-      <CommandResponsiveDialog open={isOpen} onOpenChange={setIsOpen}>
+      <CommandResponsiveDialog
+        shouldFilter={!onSearch}
+        open={isOpen}
+        onOpenChange={setIsOpen}
+      >
         <CommandInput placeholder={"Search..."} onValueChange={onSearch} />
         <CommandList>
           <CommandEmpty>

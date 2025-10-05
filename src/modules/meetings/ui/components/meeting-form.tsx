@@ -54,12 +54,12 @@ export const MeetingForm = ({
 
   const createMeeting = useMutation(
     trpc.meetings.create.mutationOptions({
-      onSuccess: async () => {
+      onSuccess: async (data) => {
         await queryClient.invalidateQueries(
           trpc.meetings.getMany.queryOptions({})
         );
 
-        onSuccess?.();
+        onSuccess?.(data.id);
       },
       onError: (error) => {
         toast.error(error.message);
@@ -69,7 +69,7 @@ export const MeetingForm = ({
 
   const updateMeeting = useMutation(
     trpc.meetings.update.mutationOptions({
-      onSuccess: async (data) => {
+      onSuccess: async () => {
         await queryClient.invalidateQueries(
           trpc.meetings.getMany.queryOptions({})
         );
@@ -80,7 +80,7 @@ export const MeetingForm = ({
           );
         }
 
-        onSuccess?.(data.id);
+        onSuccess?.();
       },
       onError: (error) => {
         toast.error(error.message);
