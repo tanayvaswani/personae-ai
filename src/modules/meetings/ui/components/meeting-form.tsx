@@ -42,7 +42,7 @@ export const MeetingForm = ({
   const router = useRouter();
   const trpc = useTRPC();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [openNewAgentDialog, setOpenNewAgentDialog] = useState(false);
   const [agentSearch, setAgentSearch] = useState("");
 
   const agents = useQuery(
