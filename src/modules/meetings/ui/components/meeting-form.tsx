@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
+  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -151,6 +152,16 @@ export const MeetingForm = ({
                   placeholder="Select an agent"
                 />
               </FormControl>
+              <FormDescription>
+                Not found what you&apos;re looking for?{" "}
+                <button
+                  type={"button"}
+                  className="text-primary hover:underline"
+                  onClick={() => setOpenNewAgentDialog(true)}
+                >
+                  Create New Agent
+                </button>
+              </FormDescription>
               <FormMessage />
             </FormItem>
           )}
