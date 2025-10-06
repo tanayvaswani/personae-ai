@@ -27,6 +27,7 @@ import { MeetingGetOne } from "../../types";
 
 import CommandSelect from "@/components/command-select";
 import GeneratedAvatar from "@/components/generated-avatar";
+import { NewAgentDialog } from "@/modules/agents/ui/components/new-agent-dialog";
 
 interface MeetingFormProps {
   onSuccess?: (id?: string) => void;
@@ -109,91 +110,97 @@ export const MeetingForm = ({
   };
 
   return (
-    <Form {...form}>
-      <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
-        <FormField
-          name="name"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Name</FormLabel>
-              <FormControl>
-                <Input placeholder={"e.g Math Consultation"} {...field} />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <FormField
-          name="agentId"
-          control={form.control}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Agent</FormLabel>
-              <FormControl>
-                <CommandSelect
-                  options={(agents.data?.items ?? []).map((agent) => ({
-                    id: agent.id,
-                    value: agent.id,
-                    children: (
-                      <div className="flex items-center gap-2">
-                        <GeneratedAvatar
-                          seed={agent.name}
-                          variant={"botttsNeutral"}
-                          className="size-6"
-                        />
-                        <span>{agent.name}</span>
-                      </div>
-                    ),
-                  }))}
-                  onSelect={field.onChange}
-                  onSearch={setAgentSearch}
-                  value={field.value}
-                  placeholder="Select an agent"
-                />
-              </FormControl>
-              <FormDescription>
-                Not found what you&apos;re looking for?{" "}
-                <button
-                  type={"button"}
-                  className="text-primary hover:underline"
-                  onClick={() => setOpenNewAgentDialog(true)}
-                >
-                  Create New Agent
-                </button>
-              </FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-        <div className="flex justify-between gap-2 max-w-full">
-          {onCancel && (
+    <>
+      <NewAgentDialog
+        open={openNewAgentDialog}
+        onOpenChange={setOpenNewAgentDialog}
+      />
+      <Form {...form}>
+        <form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+          <FormField
+            name="name"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Name</FormLabel>
+                <FormControl>
+                  <Input placeholder={"e.g Math Consultation"} {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            name="agentId"
+            control={form.control}
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Agent</FormLabel>
+                <FormControl>
+                  <CommandSelect
+                    options={(agents.data?.items ?? []).map((agent) => ({
+                      id: agent.id,
+                      value: agent.id,
+                      children: (
+                        <div className="flex items-center gap-2">
+                          <GeneratedAvatar
+                            seed={agent.name}
+                            variant={"botttsNeutral"}
+                            className="size-6"
+                          />
+                          <span>{agent.name}</span>
+                        </div>
+                      ),
+                    }))}
+                    onSelect={field.onChange}
+                    onSearch={setAgentSearch}
+                    value={field.value}
+                    placeholder="Select an agent"
+                  />
+                </FormControl>
+                <FormDescription>
+                  Not found what you&apos;re looking for?{" "}
+                  <button
+                    type={"button"}
+                    className="text-primary hover:underline"
+                    onClick={() => setOpenNewAgentDialog(true)}
+                  >
+                    Create New Agent
+                  </button>
+                </FormDescription>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <div className="flex justify-between gap-2 max-w-full">
+            {onCancel && (
+              <Button
+                variant={"outline"}
+                type={"button"}
+                disabled={isPending}
+                onClick={() => onCancel()}
+                className="w-1/2"
+              >
+                Cancel
+              </Button>
+            )}
             <Button
-              variant={"outline"}
-              type={"button"}
+              variant={"default"}
+              type={"submit"}
               disabled={isPending}
-              onClick={() => onCancel()}
               className="w-1/2"
             >
-              Cancel
+              {isPending ? (
+                <Loader className="size-4 animate-spin" />
+              ) : isEdit ? (
+                "Update"
+              ) : (
+                "Create"
+              )}
             </Button>
-          )}
-          <Button
-            variant={"default"}
-            type={"submit"}
-            disabled={isPending}
-            className="w-1/2"
-          >
-            {isPending ? (
-              <Loader className="size-4 animate-spin" />
-            ) : isEdit ? (
-              "Update"
-            ) : (
-              "Create"
-            )}
-          </Button>
-        </div>
-      </form>
-    </Form>
+          </div>
+        </form>
+      </Form>
+    </>
   );
 };
